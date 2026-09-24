@@ -193,7 +193,10 @@ const REC_TEMPLATES = [
 
 function pick<T>(list: T[], count: number, seed: number): T[] {
   const out: T[] = [];
-  for (let i = 0; i < count; i++) out.push(list[(i * 2 + seed) % list.length]);
+  for (let i = 0; i < count; i++) {
+    const item = list[(i * 2 + seed) % list.length];
+    if (item !== undefined) out.push(item);
+  }
   return out;
 }
 
@@ -206,7 +209,7 @@ export function generateResearch(
   const raw = topicOrText.trim();
   const isArticle = raw.length > 180;
   const topic = isArticle
-    ? raw.split(/[.!?\n]/)[0].slice(0, 70).trim() || "the supplied text"
+    ? (raw.split(/[.!?\n]/)[0] ?? "").slice(0, 70).trim() || "the supplied text"
     : raw || "workplace productivity";
   const count = length === "Short" ? 3 : length === "Medium" ? 4 : 6;
 
