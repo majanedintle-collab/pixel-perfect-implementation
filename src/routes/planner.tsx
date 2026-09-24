@@ -43,7 +43,7 @@ export const Route = createFileRoute("/planner")({
       },
     ],
   }),
-  component: Planner;
+  component: Planner,
 });
 
 const PRIORITIES: Priority[] = ["Urgent", "High", "Medium", "Low"];
